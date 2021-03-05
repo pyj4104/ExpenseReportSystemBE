@@ -1,0 +1,4 @@
+ROUTES = {
+	'home': '/',
+	'logIn': '/login',
+}

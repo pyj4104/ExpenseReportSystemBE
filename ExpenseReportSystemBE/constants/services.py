@@ -1,0 +1,4 @@
+SERVICES = [
+	"home",
+	#"logIn",
+]
