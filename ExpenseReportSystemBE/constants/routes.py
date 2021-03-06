@@ -1,4 +1,0 @@
-ROUTES = {
-	'home': '/',
-	'logIn': '/login',
-}

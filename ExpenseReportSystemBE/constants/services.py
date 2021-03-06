@@ -1,4 +1,0 @@
-SERVICES = [
-	"home",
-	#"logIn",
-]

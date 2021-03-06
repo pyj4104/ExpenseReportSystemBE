@@ -21,12 +21,14 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'pymysql',
+    'requests',
 ]
 
 tests_require = [
     'WebTest',
     'pytest',
     'pytest-cov',
+    'responses',
 ]
 
 setup(
