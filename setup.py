@@ -22,6 +22,7 @@ requires = [
     'zope.sqlalchemy',
     'pymysql',
     'requests',
+    'yagmail',
 ]
 
 tests_require = [

@@ -6,5 +6,6 @@ def main(global_config, **settings):
     with Configurator(settings=settings) as config:
         config.include('.routes')
         config.include('.models')
+        config.include('pyramid_mailer')
         config.scan()
     return config.make_wsgi_app()
