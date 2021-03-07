@@ -1,5 +1,6 @@
 import constants.services as s
 
 ROUTES = {
-	s.LOGIN: '/api/login',
+	s.LOGIN: '/api/logIn',
+	s.SIGNUP: '/api/signUp',
 }

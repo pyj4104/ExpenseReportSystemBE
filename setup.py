@@ -23,6 +23,7 @@ requires = [
     'pymysql',
     'requests',
     'yagmail',
+    'cerberus',
 ]
 
 tests_require = [
