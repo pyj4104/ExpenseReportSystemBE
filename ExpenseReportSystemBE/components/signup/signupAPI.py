@@ -14,7 +14,7 @@ import constants.validatorConstants as vc
 import constants.webCommunications as wcc
 
 # Import logics
-from ExpenseReportSystemBE.logics.signup import createUser
+from .signupLogic import createUser
 
 # Import data
 from ExpenseReportSystemBE.models.usr import User
@@ -53,7 +53,6 @@ def signUp(request):
 	inputs = request.json_body
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
-		print(validator.errors)
 		return fr(Response(), wcc.INVALIDINPUT)
 
 	code = createUser(request.dbsession, inputs[User.email.name],
