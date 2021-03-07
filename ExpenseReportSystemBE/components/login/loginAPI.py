@@ -1,22 +1,23 @@
-# imort libraries
+# Import libraries
 import json, requests
 from cerberus import Validator
 from pyramid.view import view_config
 from pyramid.response import Response
 
+# Import logic
+from . import loginLogic
+
 # Import data
 from ExpenseReportSystemBE.models.usr import User
 
-# import mailer
-from ExpenseReportSystemBE.components.mailer.mailerLogic import sendMail
-
-# import helper functions
+# Import functions
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse as fr
+from ExpenseReportSystemBE.components.mailer.mailerLogic import sendMail as sm
 
-# import constants
+# Import constants
+from constants.services import LOGIN
 import constants.validatorConstants as vc
 import constants.webCommunications as wcc
-from constants.services import LOGIN
 
 validatorSchema = {
 	User.email.name: {
@@ -37,7 +38,8 @@ def login(request):
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
 		return fr(Response(), wcc.INVALIDINPUT)
+	print(type(request.dbsession))
 	
-	sendMail("pyj4104@hotmail.com")
+	sm("pyj4104@hotmail.com")
 
 	return fr(Response(), wcc.OK)
