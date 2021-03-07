@@ -1,8 +1,12 @@
+from pyramid.request import Request
+
 # for mailing services
 import yagmail
 
-def sendMail(receiver: str):
-	yag = yagmail.SMTP(user="kwchurchinhouseapptest@gmail.com", password="1Plo126HDUC9t9li649G")
+def sendMail(request: Request, receiver: str):
+	email = request.registry.settings['mail.username']
+	password = request.registry.settings['mail.password']
+	yag = yagmail.SMTP(user=email, password=password)
 	yag.send(
 		to=receiver,
 		subject="Yagmail Test",

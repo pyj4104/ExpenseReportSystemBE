@@ -5,7 +5,7 @@ from pyramid.view import view_config
 from pyramid.response import Response
 
 # Import logic
-from . import loginLogic
+from . import loginLogic as logic
 
 # Import data
 from ExpenseReportSystemBE.models.usr import User
@@ -38,8 +38,10 @@ def login(request):
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
 		return fr(Response(), wcc.INVALIDINPUT)
-	print(type(request.dbsession))
+	email = inputs[User.email.name]
+	if not logic.isEmailRegistered(request.dbsession, email):
+		return fr(Response(), wcc.NOTREGISTERED)
 	
-	sm("pyj4104@hotmail.com")
+	sm(request, email)
 
 	return fr(Response(), wcc.OK)

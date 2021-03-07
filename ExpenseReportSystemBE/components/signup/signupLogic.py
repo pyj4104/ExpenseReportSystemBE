@@ -1,7 +1,5 @@
 # Import libraries
-#from sqlalchemy.exc import IntegrityError
-from pymysql.err import IntegrityError
-import sys
+from sqlalchemy.exc import IntegrityError
 
 # Import constants
 import constants.webCommunications as wcc
@@ -20,7 +18,7 @@ def createUser(dbsession, email: str, lastKorName: str, firstKorName: str,
 		firstLegalName=firstLegalName
 	)
 
-	if dbsession.query(User.email).count() > 0:
+	if len(dbsession.query(User.email).filter_by(email=email).all()) > 0:
 		return wcc.CONFLICT
 
 	dbsession.add(newUser)
