@@ -37,11 +37,11 @@ def login(request):
 	inputs = request.json_body
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
-		return fr(Response(), wcc.INVALIDINPUT)
+		return fr(request.response, wcc.INVALIDINPUT)
 	email = inputs[User.email.name]
 	if not logic.isEmailRegistered(request.dbsession, email):
-		return fr(Response(), wcc.NOTREGISTERED)
+		return fr(request.response, wcc.NOTREGISTERED)
 	
 	sm(request, email)
 
-	return fr(Response(), wcc.OK)
+	return fr(request.response, wcc.OK)

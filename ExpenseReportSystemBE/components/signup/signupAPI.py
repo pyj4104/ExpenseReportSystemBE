@@ -53,11 +53,11 @@ def signUp(request):
 	inputs = request.json_body
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
-		return fr(Response(), wcc.INVALIDINPUT)
+		return fr(request.response, wcc.INVALIDINPUT)
 
 	code = createUser(request.dbsession, inputs[User.email.name],
 		inputs[User.lastKorName.name], inputs[User.firstKorName.name],
 		inputs[User.lastLegalName.name], inputs[User.firstLegalName.name]
 	)
 	
-	return fr(Response(), code)
+	return fr(request.response, code)
