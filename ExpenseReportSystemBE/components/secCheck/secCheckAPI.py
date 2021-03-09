@@ -5,10 +5,7 @@ from pyramid.view import view_config
 from pyramid.response import Response
 
 # Import logic
-from . import loginLogic as logic
-
-# Import classes
-import ExpenseReportSystemBE.components.secCheck.secCheckLogic as secCode
+from . import secCheckLogic as logic
 
 # Import data
 from ExpenseReportSystemBE.models.usr import User
@@ -16,22 +13,23 @@ from ExpenseReportSystemBE.models.usr import User
 # Import functions
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse, addHeaders
 from ExpenseReportSystemBE.helpers.tokenGenerator import tokenGenerator as tg
-from ExpenseReportSystemBE.components.mailer.mailerLogic import sendMail as sm
 
 # Import constants
-from constants.services import LOGIN
+from constants.services import SECCHECK
+import constants.session as sc
 import constants.validatorConstants as vc
 import constants.webCommunications as wcc
+import constants.serviceSpecificConstants.secCheck as c
 
 validatorSchema = {
-	User.email.name: {
+	c.SECCODE: {
 		vc.TYPEOFINPUT: vc.STRING,
-		vc.REGEX: vc.REGEXEMAIL,
+		vc.REGEX: vc.REGEXSECCODE,
 	},
 }
 
-@view_config(route_name=LOGIN, request_method=wcc.POST)
-def logInPost(request):
+@view_config(route_name=SECCHECK, request_method=wcc.POST)
+def submitSecCodePOST(request):
 	"""
 		LogIn API
 		Access Method: POST
@@ -43,19 +41,17 @@ def logInPost(request):
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
 		return formatResponse(request.response, wcc.INVALIDINPUT)
-	email = inputs[User.email.name]
-	if not logic.isEmailRegistered(request.dbsession, email):
+	code = inputs[c.SECCODE]
+	if not logic.currentSecCodes.isSecCodeIn(code):
 		return formatResponse(request.response, wcc.NOTREGISTERED)
-
-	token = tg(6)
 	
-	secCode.currentSecCodes.initiateLogInProcedure(email, token)
-	sm(request, email, token)
+	request.session[sc.AUTHORIZATION] = tg(32)
+	logic.currentSecCodes.removeSecCode(token = code)
 
 	return formatResponse(request.response, wcc.OK)
 
-@view_config(route_name=LOGIN, request_method=wcc.OPTIONS)
-def logInOptions(request):
+@view_config(route_name=SECCHECK, request_method=wcc.OPTIONS)
+def submitSecCodeOPTIONS(request):
 	"""
 		Set CORS policy
 		Access Method = OPTIONS

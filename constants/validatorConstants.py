@@ -15,3 +15,4 @@ REGEX = 'regex'			# check uisng regex
 REGEXEMAIL = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 REGEXKORNAME = '^[가-힣]{1,4}$'
 REGEXLEGALNAME = '^[a-zA-Z,.\'-]+$'
+REGEXSECCODE = '^[0-9a-zA-Z]{6}$'
