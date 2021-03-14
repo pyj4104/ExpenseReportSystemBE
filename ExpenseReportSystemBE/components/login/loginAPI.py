@@ -9,19 +9,21 @@ from . import loginLogic as logic
 
 # Import classes
 import ExpenseReportSystemBE.components.secCheck.secCheckLogic as secCode
+from ExpenseReportSystemBE.components.sessionControls.sessionsLogic import currentSessions
 
 # Import data
 from ExpenseReportSystemBE.models.usr import User
 
 # Import functions
-from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse, addHeaders
+from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse
 from ExpenseReportSystemBE.helpers.tokenGenerator import tokenGenerator as tg
 from ExpenseReportSystemBE.components.mailer.mailerLogic import sendMail as sm
 
 # Import constants
-from constants.services import LOGIN
+import constants.session as sc
 import constants.validatorConstants as vc
 import constants.webCommunications as wcc
+from constants.services import LOGIN
 
 validatorSchema = {
 	User.email.name: {
@@ -29,6 +31,13 @@ validatorSchema = {
 		vc.REGEX: vc.REGEXEMAIL,
 	},
 }
+
+@view_config(route_name=LOGIN, request_method=wcc.GET)
+def isLoggedIn(request):
+	if (sc.AUTHORIZATION not in request.session) or \
+		not(currentSessions.isLoggedIn(request.session[sc.AUTHORIZATION])):
+		return formatResponse(request.response, wcc.NOTREGISTERED)
+	return formatResponse(request.response, wcc.OK)
 
 @view_config(route_name=LOGIN, request_method=wcc.POST)
 def logInPost(request):
@@ -38,7 +47,6 @@ def logInPost(request):
 		Input: none
 		Output: response that says to check email
 	"""
-	addHeaders(request.response)
 	inputs = request.json_body
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
@@ -53,16 +61,16 @@ def logInPost(request):
 	sm(request, email, token)
 
 	return formatResponse(request.response, wcc.OK)
-
+"""
 @view_config(route_name=LOGIN, request_method=wcc.OPTIONS)
 def logInOptions(request):
-	"""
+	
 		Set CORS policy
 		Access Method = OPTIONS
 		Input: none
 		Output: returns headers that will allow the access control
-	"""
+	
 	response = request.response
-	addHeaders(response)
 
 	return formatResponse(response, wcc.OK)
+"""

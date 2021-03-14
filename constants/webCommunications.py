@@ -21,8 +21,8 @@ SERVERTIMEOUT = 'The endpoint server is down. Please try again later.'
 INVALIDPATH = {"error":"The page requested is not found. Please check the URL."}
 
 # Headers
-DEFAULTHEADER = {
+"""DEFAULTHEADER = {
 	'Access-Control-Allow-Origin': "*",
 	'Access-Control-Allow-Methods': "GET, POST, DELETE, PUT",
 	'Access-Control-Allow-Headers': "Content-Type, Authorization",
-}
+}"""

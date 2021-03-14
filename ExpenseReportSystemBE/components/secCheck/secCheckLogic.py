@@ -30,7 +30,7 @@ class SecCodes:
 
 	def retrieveUser(self, token: str) -> str:
 		"""
-			When either token or user email is passed in, returns the user email.
+			When either token is passed in, returns the user email.
 			Raises ValueError when either is empty or when both are passed in.
 
 			Inputs: token in str, userEmail in str

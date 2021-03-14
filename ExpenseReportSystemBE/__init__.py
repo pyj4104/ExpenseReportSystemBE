@@ -9,6 +9,6 @@ def main(global_config, **settings):
         config.include('.routes')
         config.include('.models')
         config.include('pyramid_mailer')
-        config.set_session_factory(SignedCookieSessionFactory(tg(64)))
+        config.set_session_factory(SignedCookieSessionFactory(tg(64), httponly=True, secure=True))
         config.scan()
     return config.make_wsgi_app()
