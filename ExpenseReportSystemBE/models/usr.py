@@ -20,7 +20,7 @@ class UserRolesEnum(e):
 	siteAdmin = 4
 
 class User(Base):
-	__tablename__ = 'user'
+	__tablename__ = 'User'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
 	lastKorName = Column('lastKorName', Text, nullable=False)
 	firstKorName = Column('firstKorName', Text, nullable=False)

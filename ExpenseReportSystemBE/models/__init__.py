@@ -7,6 +7,10 @@ import zope.sqlalchemy
 # ``Base.metadata`` prior to any initialization routines.
 from .mymodel import MyModel  # flake8: noqa
 from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.expenseReport import ExpenseReport
+from ExpenseReportSystemBE.models.detailedReport import DetailedReport
+from ExpenseReportSystemBE.models.categories import Categories
+from ExpenseReportSystemBE.models.reportApproval import ReportApproval
 
 # Run ``configure_mappers`` after defining all of the models to ensure
 # all relationships can be setup.
