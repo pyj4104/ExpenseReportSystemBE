@@ -12,9 +12,9 @@ def setup_models(dbsession):
     Add or update models / fixtures in the database.
 
     """
-    model = models.mymodel.MyModel(name='one', value=1)
-    dbsession.add(model)
-
+    #model = models.mymodel.MyModel(name='one', value=1)
+    #dbsession.add(model)
+    models.ministries.Ministries.initialize(dbsession)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()
@@ -23,7 +23,6 @@ def parse_args(argv):
         help='Configuration file, e.g., development.ini',
     )
     return parser.parse_args(argv[1:])
-
 
 def main(argv=sys.argv):
     args = parse_args(argv)

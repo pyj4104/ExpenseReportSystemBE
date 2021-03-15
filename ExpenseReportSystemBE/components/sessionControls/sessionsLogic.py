@@ -1,4 +1,4 @@
-from ExpenseReportSystemBE.models.usr import User, UserRolesEnum
+from ExpenseReportSystemBE.models.usr import User
 
 class Sessions:
 	usrTokenDict: dict
