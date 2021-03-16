@@ -5,7 +5,7 @@ from pyramid.view import notfound_view_config
 # Import constants
 import constants.webCommunications as wcc
 
-@notfound_view_config()
+#@notfound_view_config()
 def notfound_view(request):
 	"""
 		When a user try to access undefined path.

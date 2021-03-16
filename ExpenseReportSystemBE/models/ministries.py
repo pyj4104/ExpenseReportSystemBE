@@ -15,12 +15,13 @@ ministries = [
 	"Hi-C",
 	"Young Adults",
 	"Finance",
+	"Mission",
 ]
 
 class Ministries(Base):
 	__tablename__ = 'Ministries'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
-	ministry = Column('ministry', Text, nullable=False)
+	ministry = Column('ministry', String(50), nullable=False, unique=True)
 
 	def initialize(dbsession):
 		for ministry in ministries:

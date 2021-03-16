@@ -61,16 +61,3 @@ def logInPost(request):
 	sm(request, email, token)
 
 	return formatResponse(request.response, wcc.OK)
-"""
-@view_config(route_name=LOGIN, request_method=wcc.OPTIONS)
-def logInOptions(request):
-	
-		Set CORS policy
-		Access Method = OPTIONS
-		Input: none
-		Output: returns headers that will allow the access control
-	
-	response = request.response
-
-	return formatResponse(response, wcc.OK)
-"""

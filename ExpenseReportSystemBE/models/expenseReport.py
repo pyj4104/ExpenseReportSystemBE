@@ -1,4 +1,4 @@
-from enum import Enum as e
+from datetime import date
 
 from sqlalchemy import (
 	Column,
@@ -7,21 +7,18 @@ from sqlalchemy import (
 	Text,
 	Enum,
 	ForeignKey,
-	Numeric
+	Numeric,
+	Date
 )
 
 from ExpenseReportSystemBE.models.meta import Base
-
-class Ministries(e):
-	children = 0
-	hiC = 1
-	youngPeople = 2
 
 class ExpenseReport(Base):
 	__tablename__ = 'ExpenseReport'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
 	userID = Column('userID', Integer, ForeignKey("User.id"), nullable=True)
-	ministry = Column(Enum(Ministries), nullable=False)
+	ministryID = Column('ministryID', Integer, ForeignKey("Ministries.id"), nullable=False)
 	korName = Column('korName', Text, nullable=False)
 	legalName = Column('legalName', Text, nullable=False)
-	amount = Column('amountSpent', Numeric(12,2), nullable=False)
+	amount = Column('amount', Numeric(12,2), nullable=False)
+	date = Column('date', Date, nullable=False, default=date.today())
