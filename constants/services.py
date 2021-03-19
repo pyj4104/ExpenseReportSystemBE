@@ -4,6 +4,7 @@ SIGNUP = 'signUp'
 SECCHECK = 'secCheck'
 EXPENSEREPORT = 'expenseReport'
 MINISTRIES = 'ministries'
+CATEGORIES = 'categories'
 
 SERVICES = [
 	LOGIN,
@@ -11,4 +12,5 @@ SERVICES = [
 	SECCHECK,
 	EXPENSEREPORT,
 	MINISTRIES,
+	CATEGORIES,
 ]

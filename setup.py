@@ -24,6 +24,7 @@ requires = [
     'requests',
     'yagmail',
     'cerberus',
+    'beautifulsoup4',
 ]
 
 tests_require = [

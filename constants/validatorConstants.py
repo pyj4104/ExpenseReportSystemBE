@@ -3,6 +3,8 @@ TYPEOFINPUT = 'type'
 INTEGER = 'integer'
 STRING = 'string'
 LIST = 'list'
+SCHEMA = 'schema'
+DICT = 'dict'
 
 # Properties
 ALLOWED = 'allowed' 	# for allowed list
@@ -18,3 +20,4 @@ REGEXKORNAME = '^[가-힣]{1,4}$'
 REGEXLEGALNAME = '^[a-zA-Z,.\'-]+$'
 REGEXSECCODE = '^[0-9a-zA-Z]{6}$'
 REGEXMONEY = '^[1-9][0-9]{0,9}[\.]?[\d]{0,2}$'
+REGEXCATEGORIES = '^[0-9a-zA-Z가-힣 ]+$'
