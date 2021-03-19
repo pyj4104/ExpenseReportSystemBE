@@ -12,7 +12,7 @@ import ExpenseReportSystemBE.components.secCheck.secCheckLogic as secCode
 from ExpenseReportSystemBE.components.sessionControls.sessionsLogic import currentSessions
 
 # Import data
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 # Import functions
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse
@@ -26,7 +26,7 @@ import constants.webCommunications as wcc
 from constants.services import LOGIN
 
 validatorSchema = {
-	User.email.name: {
+	Users.email.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXEMAIL,
 	},
@@ -51,7 +51,7 @@ def logInPost(request):
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
 		return formatResponse(request.response, wcc.INVALIDINPUT)
-	email = inputs[User.email.name]
+	email = inputs[Users.email.name]
 	if not logic.isEmailRegistered(request.dbsession, email):
 		return formatResponse(request.response, wcc.NOTREGISTERED)
 

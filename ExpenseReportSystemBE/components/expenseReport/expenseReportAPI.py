@@ -9,8 +9,8 @@ from pyramid.response import Response
 import ExpenseReportSystemBE.components.expenseReport.expenseReportLogic as logic
 
 # Import data
-from ExpenseReportSystemBE.models.expenseReport import ExpenseReport
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.expenseReports import ExpenseReports
+from ExpenseReportSystemBE.models.users import Users
 
 # Import functions
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse
@@ -22,26 +22,26 @@ import constants.webCommunications as wcc
 from constants.services import EXPENSEREPORT
 
 validatorSchema = {
-	ExpenseReport.ministryID.name: {
+	ExpenseReports.ministryID.name: {
 		vc.TYPEOFINPUT: vc.INTEGER
 	},
-	User.lastKorName.name: {
+	Users.lastKorName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXKORNAME
 	},
-	User.firstKorName.name: {
+	Users.firstKorName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXKORNAME
 	},
-	User.lastLegalName.name: {
+	Users.lastLegalName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXLEGALNAME
 	},
-	User.firstLegalName.name: {
+	Users.firstLegalName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXLEGALNAME
 	},
-	ExpenseReport.amount.name: {
+	ExpenseReports.amount.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXMONEY
 	}
@@ -65,13 +65,13 @@ def submitReport(request):
 		return formatResponse(request.response, wcc.INVALIDINPUT)
 
 	# Get input params
-	ministryID = inputs[ExpenseReport.ministryID.name]
-	korName = inputs[User.lastKorName.name] + inputs[User.firstKorName.name]
-	legalName = inputs[User.firstLegalName.name] + " " + inputs[User.lastLegalName.name]
-	amount = Decimal(inputs[ExpenseReport.amount.name])
+	ministryID = inputs[ExpenseReports.ministryID.name]
+	korName = inputs[Users.lastKorName.name] + inputs[Users.firstKorName.name]
+	legalName = inputs[Users.firstLegalName.name] + " " + inputs[Users.lastLegalName.name]
+	amount = Decimal(inputs[ExpenseReports.amount.name])
 
 	# Put into DB
 	reportID = logic.submitReport(request.dbsession, ministryID=ministryID, korName=korName, legalName=legalName, amount=amount)
-	request.response.json_body = {ExpenseReport.id.name: reportID}
+	request.response.json_body = {ExpenseReports.id.name: reportID}
 
 	return formatResponse(request.response, wcc.OK)

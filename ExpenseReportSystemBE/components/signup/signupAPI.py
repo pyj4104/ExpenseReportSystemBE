@@ -17,26 +17,26 @@ import constants.webCommunications as wcc
 from .signupLogic import createUser
 
 # Import data
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 validatorSchema = {
-	User.email.name: {
+	Users.email.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXEMAIL,
 	},
-	User.firstKorName.name: {
+	Users.firstKorName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXKORNAME
 	},
-	User.firstLegalName.name: {
+	Users.firstLegalName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXLEGALNAME
 	},
-	User.lastKorName.name: {
+	Users.lastKorName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXKORNAME
 	},
-	User.lastLegalName.name: {
+	Users.lastLegalName.name: {
 		vc.TYPEOFINPUT: vc.STRING,
 		vc.REGEX: vc.REGEXLEGALNAME
 	},
@@ -55,9 +55,9 @@ def signUp(request):
 	if not validator.validate(inputs):
 		return fr(request.response, wcc.INVALIDINPUT)
 
-	code = createUser(request.dbsession, inputs[User.email.name],
-		inputs[User.lastKorName.name], inputs[User.firstKorName.name],
-		inputs[User.lastLegalName.name], inputs[User.firstLegalName.name]
+	code = createUser(request.dbsession, inputs[Users.email.name],
+		inputs[Users.lastKorName.name], inputs[Users.firstKorName.name],
+		inputs[Users.lastLegalName.name], inputs[Users.firstLegalName.name]
 	)
 	
 	return fr(request.response, code)

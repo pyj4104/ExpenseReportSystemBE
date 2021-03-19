@@ -13,10 +13,10 @@ from sqlalchemy import (
 
 from ExpenseReportSystemBE.models.meta import Base
 
-class ReportApproval(Base):
-	__tablename__ = 'ReportApproval'
+class ReportApprovals(Base):
+	__tablename__ = 'ReportApprovals'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
-	formID = Column('formID', Integer, ForeignKey("ExpenseReport.id"), nullable=False)
+	formID = Column('formID', Integer, ForeignKey("ExpenseReports.id"), nullable=False)
 	headOfDepartment = Column('headOfDepartment', Boolean, nullable=False, default=False)
 	headOfFinancial = Column('headOfFinancial', Boolean, nullable=False, default=False)
 	financialElder = Column('financialElder', Boolean, nullable=False, default=False)

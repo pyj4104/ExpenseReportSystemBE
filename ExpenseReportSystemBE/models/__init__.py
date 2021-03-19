@@ -5,13 +5,12 @@ import zope.sqlalchemy
 
 # Import or define all models here to ensure they are attached to the
 # ``Base.metadata`` prior to any initialization routines.
-from .mymodel import MyModel  # flake8: noqa
 from ExpenseReportSystemBE.models.categories import Categories
 from ExpenseReportSystemBE.models.detailedReports import DetailedReports
-from ExpenseReportSystemBE.models.expenseReport import ExpenseReport
+from ExpenseReportSystemBE.models.expenseReports import ExpenseReports
 from ExpenseReportSystemBE.models.ministries import Ministries
-from ExpenseReportSystemBE.models.reportApproval import ReportApproval
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.reportApprovals import ReportApprovals
+from ExpenseReportSystemBE.models.users import Users
 from ExpenseReportSystemBE.models.userRoles import UserRoles
 
 # Run ``configure_mappers`` after defining all of the models to ensure

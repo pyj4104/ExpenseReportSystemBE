@@ -9,7 +9,7 @@ def submitCategories(dbsession, inputs: [json]):
 	for category in inputs:
 		row = Categories(
 			formID=category[Categories.formID.name],
-			category=category[Categories.category.name],
+			categoryName=category[Categories.categoryName.name],
 			amount=Decimal(category[Categories.amount.name]),
 			remarks=category[Categories.remarks.name]
 		)

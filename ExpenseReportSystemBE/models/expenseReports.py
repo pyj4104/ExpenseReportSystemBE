@@ -14,10 +14,10 @@ from sqlalchemy import (
 
 from ExpenseReportSystemBE.models.meta import Base
 
-class ExpenseReport(Base):
-	__tablename__ = 'ExpenseReport'
+class ExpenseReports(Base):
+	__tablename__ = 'ExpenseReports'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
-	userID = Column('userID', Integer, ForeignKey("User.id"), nullable=True)
+	userID = Column('userID', Integer, ForeignKey("Users.id"), nullable=True)
 	ministryID = Column('ministryID', Integer, ForeignKey("Ministries.id"), nullable=False)
 	korName = Column('korName', Text, nullable=False)
 	legalName = Column('legalName', Text, nullable=False)

@@ -28,7 +28,7 @@ validatorSchema = {
 			vc.TYPEOFINPUT: vc.DICT,
 			vc.SCHEMA: {
 				Categories.formID.name: {vc.TYPEOFINPUT: vc.INTEGER},
-				Categories.category.name: {vc.TYPEOFINPUT: vc.STRING, vc.REGEX: vc.REGEXCATEGORIES},
+				Categories.categoryName.name: {vc.TYPEOFINPUT: vc.STRING, vc.REGEX: vc.REGEXCATEGORIES},
 				Categories.amount.name: {vc.TYPEOFINPUT: vc.STRING,vc.REGEX: vc.REGEXMONEY},
 				Categories.remarks.name: {vc.TYPEOFINPUT: vc.STRING},
 			}

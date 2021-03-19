@@ -5,12 +5,12 @@ from sqlalchemy.exc import IntegrityError
 import constants.webCommunications as wcc
 
 # Import data
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 def createUser(dbsession, email: str, lastKorName: str, firstKorName: str,
 		lastLegalName: str, firstLegalName: str) -> int:
 
-	newUser = User(
+	newUser = Users(
 		email=email,
 		lastKorName=lastKorName,
 		firstKorName=firstKorName,
@@ -18,7 +18,7 @@ def createUser(dbsession, email: str, lastKorName: str, firstKorName: str,
 		firstLegalName=firstLegalName
 	)
 
-	if len(dbsession.query(User.email).filter_by(email=email).all()) > 0:
+	if len(dbsession.query(Users.email).filter_by(email=email).all()) > 0:
 		return wcc.CONFLICT
 
 	dbsession.add(newUser)

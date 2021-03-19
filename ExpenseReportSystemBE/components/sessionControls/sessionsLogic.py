@@ -1,4 +1,4 @@
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 class Sessions:
 	usrTokenDict: dict
@@ -8,7 +8,7 @@ class Sessions:
 		self.usrTokenDict = dict()
 		self.tokenUsrDict = dict()
 
-	def startSession(self, token: str, user: User):
+	def startSession(self, token: str, user: Users):
 		self.__removeUsr__(user.email)
 		self.usrTokenDict[user.email] = token
 		self.tokenUsrDict[token] = user
@@ -25,14 +25,14 @@ class Sessions:
 			if token in self.tokenUsrDict:
 				del self.tokenUsrDict[token]
 
-def getUser(dbsession, email: str) -> User:
+def getUser(dbsession, email: str) -> Users:
 	"""
 		Checks if the email is registered.
 		
 		input: email string
 		output: boolean value indicating whether the user was registered or not
 	"""
-	users = dbsession.query(User).filter_by(email=email)
+	users = dbsession.query(Users).filter_by(email=email)
 	if users.count() > 1:
 		raise IntegrityError
 	user = users.first()

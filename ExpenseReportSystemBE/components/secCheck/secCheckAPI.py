@@ -9,7 +9,7 @@ from . import secCheckLogic as logic
 from ExpenseReportSystemBE.components.sessionControls.sessionsLogic import currentSessions, getUser
 
 # Import data
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 # Import functions
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse

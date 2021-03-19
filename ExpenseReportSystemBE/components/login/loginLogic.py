@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.session import Session
 
 # Import data
-from ExpenseReportSystemBE.models.usr import User
+from ExpenseReportSystemBE.models.users import Users
 
 # import mailer
 from ExpenseReportSystemBE.components.mailer.mailerLogic import sendMail as sm
@@ -20,7 +20,7 @@ def isEmailRegistered(dbsession: Session, email: str) -> bool:
 		input: email string
 		output: boolean value indicating whether the user was registered or not
 	"""
-	users = dbsession.query(User).filter_by(email=email)
+	users = dbsession.query(Users).filter_by(email=email)
 	if users.count() > 1:
 		raise IntegrityError
 	user = users.first()
