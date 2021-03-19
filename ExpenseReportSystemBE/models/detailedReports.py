@@ -9,8 +9,8 @@ from sqlalchemy import (
 
 from ExpenseReportSystemBE.models.meta import Base
 
-class DetailedReport(Base):
-	__tablename__ = 'DetailedReport'
+class DetailedReports(Base):
+	__tablename__ = 'DetailedReports'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
 	formID = Column('formID', Integer, ForeignKey('ExpenseReport.id'), nullable=False)
 	categoryID = Column('categoryID', Integer, ForeignKey('Categories.id'), nullable=False)

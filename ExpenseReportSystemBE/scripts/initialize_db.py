@@ -14,7 +14,7 @@ def setup_models(dbsession):
     """
     #model = models.mymodel.MyModel(name='one', value=1)
     #dbsession.add(model)
-    models.ministries.Ministries.initialize(dbsession)
+    models.ministries.initialize(dbsession)
 
 def parse_args(argv):
     parser = argparse.ArgumentParser()

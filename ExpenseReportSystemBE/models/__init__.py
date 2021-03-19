@@ -7,7 +7,7 @@ import zope.sqlalchemy
 # ``Base.metadata`` prior to any initialization routines.
 from .mymodel import MyModel  # flake8: noqa
 from ExpenseReportSystemBE.models.categories import Categories
-from ExpenseReportSystemBE.models.detailedReport import DetailedReport
+from ExpenseReportSystemBE.models.detailedReports import DetailedReports
 from ExpenseReportSystemBE.models.expenseReport import ExpenseReport
 from ExpenseReportSystemBE.models.ministries import Ministries
 from ExpenseReportSystemBE.models.reportApproval import ReportApproval
