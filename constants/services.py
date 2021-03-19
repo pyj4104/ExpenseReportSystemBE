@@ -5,6 +5,7 @@ SECCHECK = 'secCheck'
 EXPENSEREPORT = 'expenseReport'
 MINISTRIES = 'ministries'
 CATEGORIES = 'categories'
+DETAILEDREPORTS = 'detailedReports'
 
 SERVICES = [
 	LOGIN,
@@ -13,4 +14,5 @@ SERVICES = [
 	EXPENSEREPORT,
 	MINISTRIES,
 	CATEGORIES,
+	DETAILEDREPORTS,
 ]

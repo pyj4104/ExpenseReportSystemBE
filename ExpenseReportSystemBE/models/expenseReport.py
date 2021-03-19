@@ -8,7 +8,8 @@ from sqlalchemy import (
 	Enum,
 	ForeignKey,
 	Numeric,
-	Date
+	Date,
+	Boolean
 )
 
 from ExpenseReportSystemBE.models.meta import Base
@@ -22,3 +23,4 @@ class ExpenseReport(Base):
 	legalName = Column('legalName', Text, nullable=False)
 	amount = Column('amount', Numeric(12,2), nullable=False)
 	date = Column('date', Date, nullable=False, default=date.today())
+	submitted = Column('submitted', Boolean, nullable=False, default=False)

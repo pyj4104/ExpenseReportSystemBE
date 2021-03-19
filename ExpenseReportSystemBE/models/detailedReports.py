@@ -1,3 +1,5 @@
+from datetime import date
+
 from sqlalchemy import (
 	Column,
 	Integer,
@@ -12,9 +14,7 @@ from ExpenseReportSystemBE.models.meta import Base
 class DetailedReports(Base):
 	__tablename__ = 'DetailedReports'
 	id = Column('id', Integer, primary_key=True, autoincrement=True)
-	formID = Column('formID', Integer, ForeignKey('ExpenseReport.id'), nullable=False)
 	categoryID = Column('categoryID', Integer, ForeignKey('Categories.id'), nullable=False)
-	date = Column('date', Date, nullable=False)
-	amount = Column('amountSpent', Numeric(12,2), nullable=False)
+	date = Column('date', Date, nullable=False, default=date.today())
+	amount = Column('amount', Numeric(12,2), nullable=False)
 	breakdown = Column('breakdown', Text, nullable=True)
-
