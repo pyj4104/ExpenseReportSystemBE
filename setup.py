@@ -25,6 +25,7 @@ requires = [
     'yagmail',
     'cerberus',
     'beautifulsoup4',
+    'lxml',
 ]
 
 tests_require = [

@@ -12,6 +12,7 @@ from ExpenseReportSystemBE.models.ministries import Ministries
 from ExpenseReportSystemBE.models.reportApprovals import ReportApprovals
 from ExpenseReportSystemBE.models.users import Users
 from ExpenseReportSystemBE.models.userRoles import UserRoles
+from ExpenseReportSystemBE.models.receipts import Receipts
 
 # Run ``configure_mappers`` after defining all of the models to ensure
 # all relationships can be setup.

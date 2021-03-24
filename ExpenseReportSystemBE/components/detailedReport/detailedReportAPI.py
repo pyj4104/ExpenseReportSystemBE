@@ -56,8 +56,9 @@ def submitReport(request):
 
 	# Sanitize input
 	for detailedReport in inputs[DetailedReports.__tablename__]:
-		soup = BeautifulSoup(detailedReport[DetailedReports.breakdown.name], features='lxml')
-		detailedReport[DetailedReports.breakdown.name] = soup.get_text()
+		if DetailedReports.breakdown.name in detailedReport:
+			soup = BeautifulSoup(detailedReport[DetailedReports.breakdown.name], features='html.parser')
+			detailedReport[DetailedReports.breakdown.name] = soup.get_text()
 
 	if not inputs[DetailedReports.__tablename__]:
 		request.response.json_body = {"error": "Please submit at least one category"}

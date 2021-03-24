@@ -1,6 +1,8 @@
 # Import libraries
 import json, requests
+from functools import partial
 from pyramid.view import view_config
+from sqlalchemy.orm import load_only
 
 # Import functions
 from ExpenseReportSystemBE.helpers.modelToDict import modelToDict
@@ -22,7 +24,9 @@ def submitReport(request):
 		Output: list of ministries in json format
 	"""
 	request.response.headers[wcc.CONTENTTYPE] = wcc.JSON
-	ministries = list(map(modelToDict,(request.dbsession.query(Ministries)
+	dataModel = [Ministries.id.name, Ministries.ministryName.name]
+	ministries = list(map(partial(modelToDict,columnNames=dataModel),
+		(request.dbsession.query(Ministries.id, Ministries.ministryName)
 		.order_by(Ministries.id)
 		.all())))
 	request.response.json_body = ministries

@@ -6,6 +6,7 @@ EXPENSEREPORT = 'expenseReport'
 MINISTRIES = 'ministries'
 CATEGORIES = 'categories'
 DETAILEDREPORTS = 'detailedReports'
+RECEIPTS = 'receipts'
 
 SERVICES = [
 	LOGIN,
@@ -15,4 +16,5 @@ SERVICES = [
 	MINISTRIES,
 	CATEGORIES,
 	DETAILEDREPORTS,
+	RECEIPTS,
 ]

@@ -8,4 +8,5 @@ ROUTES = {
 	s.MINISTRIES: '/api/ministries',
 	s.CATEGORIES: '/api/categories',
 	s.DETAILEDREPORTS: '/api/detailedReports',
+	s.RECEIPTS: '/api/receipts',
 }

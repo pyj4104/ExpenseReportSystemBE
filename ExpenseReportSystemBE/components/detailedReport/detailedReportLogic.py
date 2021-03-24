@@ -13,7 +13,8 @@ def submitDetailedReport(dbsession, inputs: [json]):
 		row = DetailedReports(
 			categoryID=report[DetailedReports.categoryID.name],
 			date= toDate(report[DetailedReports.date.name]),
-			amount=Decimal(report[DetailedReports.amount.name]),
-			breakdown=report[DetailedReports.breakdown.name]
+			amount=Decimal(report[DetailedReports.amount.name])
 		)
+		if DetailedReports.breakdown.name in report:
+			row.breakdown = report[DetailedReports.breakdown.name]
 		dbsession.add(row)

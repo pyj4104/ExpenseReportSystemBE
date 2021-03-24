@@ -2,7 +2,7 @@
 import json, requests
 from bs4 import BeautifulSoup
 from cerberus import Validator
-from decimal import Decimal
+from functools import partial
 from pyramid.view import view_config
 from pyramid.response import Response
 
@@ -13,6 +13,7 @@ import ExpenseReportSystemBE.components.categories.categoriesLogic as logic
 from ExpenseReportSystemBE.models.categories import Categories
 
 # Import functions
+from ExpenseReportSystemBE.helpers.modelToDict import modelToDict
 from ExpenseReportSystemBE.helpers.responseFormatter import formatResponse
 
 # Import constants
@@ -51,18 +52,60 @@ def submitReport(request):
 	inputs = request.json_body
 	validator = Validator(validatorSchema)
 	if not validator.validate(inputs):
+		print(validator.errors)
 		return formatResponse(request.response, wcc.INVALIDINPUT)
 
 	# Sanitize input
 	for category in inputs[Categories.__tablename__]:
-		soup = BeautifulSoup(category[Categories.remarks.name], features='lxml')
-		category[Categories.remarks.name] = soup.get_text()
-
+		if Categories.remarks.name in category:
+			soup = BeautifulSoup(category[Categories.remarks.name], features='html.parser')
+			category[Categories.remarks.name] = soup.get_text()
+	
 	if not inputs[Categories.__tablename__]:
 		request.response.json_body = {"error": "Please submit at least one category"}
 		return formatResponse(request.response, wcc.OK)
 
 	# Put into DB
 	logic.submitCategories(request.dbsession, inputs[Categories.__tablename__])
+
+	return formatResponse(request.response, wcc.OK)
+
+@view_config(route_name=CATEGORIES, request_method=wcc.GET)
+def getCategories(request):
+	# Set the return type
+	request.response.headers[wcc.CONTENTTYPE] = wcc.JSON
+	
+	inputs = dict(request.GET)
+
+	schema = {
+		Categories.formID.name: {
+			vc.TYPEOFINPUT: vc.STRING,
+			vc.REGEX: vc.REGEXINTEGER
+		}
+	}
+	
+	validator = Validator(schema)
+	if not validator.validate(inputs):
+		return formatResponse(request.response, wcc.INVALIDINPUT)
+
+	formID = int(inputs[Categories.formID.name])
+	
+	dataModel = [Categories.id.name, Categories.categoryName.name]
+	categories = (
+		request.dbsession.query(
+			Categories.id,
+			Categories.categoryName
+		).filter(
+			Categories.formID==formID
+		).all()
+	)
+
+	categoriesDict = list(
+		map(
+			partial(modelToDict,columnNames=dataModel), categories
+		)
+	)
+
+	request.response.json_body = categoriesDict
 
 	return formatResponse(request.response, wcc.OK)
