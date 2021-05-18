@@ -26,6 +26,8 @@ requires = [
     'cerberus',
     'beautifulsoup4',
     'lxml',
+    'gunicorn',
+    'pyramid_mailer',
 ]
 
 tests_require = [
